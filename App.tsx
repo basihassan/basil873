@@ -23,6 +23,7 @@ const createInitialData = () => {
         bio: "أحب الموضة والأناقة ✨ أشارككم تنسيقاتي اليومية.",
         instagram: "sara.fashion",
         twitter: "sara_tweets",
+        website: "sara-styles.com",
         password: "password123",
       },
       {
@@ -236,9 +237,15 @@ const ProfileHeader: React.FC<{user: User}> = ({ user }) => (
             <div className="flex-1">
                 <h2 className="text-xl font-bold text-gray-800">{user.username}</h2>
                 <p className="text-sm text-gray-600">{user.fullName}</p>
-                 <div className="flex space-x-4 space-x-reverse mt-2 text-sm text-blue-500">
-                    {user.instagram && <a href={`https://instagram.com/${user.instagram}`} target="_blank" rel="noopener noreferrer">@{user.instagram}</a>}
-                    {user.twitter && <a href={`https://twitter.com/${user.twitter}`} target="_blank" rel="noopener noreferrer">@{user.twitter}</a>}
+                 <div className="flex flex-col items-start space-y-1 mt-2 text-sm">
+                    {user.instagram && <a href={`https://instagram.com/${user.instagram}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">@{user.instagram}</a>}
+                    {user.twitter && <a href={`https://twitter.com/${user.twitter}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">@{user.twitter}</a>}
+                    {user.website && (
+                        <a href={`https://${user.website.replace(/^https?:\/\//, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1 space-x-reverse text-pink-600 hover:underline">
+                            {React.cloneElement(ICONS.link, { className: "h-4 w-4"})}
+                            <span>{user.website.replace(/^https?:\/\//, '')}</span>
+                        </a>
+                    )}
                 </div>
             </div>
         </div>
@@ -351,6 +358,10 @@ const EditProfilePage: React.FC<{
                          <div className="mt-4">
                             <label htmlFor="twitter" className="block text-sm font-medium text-gray-700 mb-1">تويتر</label>
                             <input type="text" name="twitter" id="twitter" placeholder="username" value={formData.twitter || ''} onChange={handleChange} className="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-pink-500 focus:border-pink-500" />
+                        </div>
+                        <div className="mt-4">
+                            <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">الموقع الإلكتروني</label>
+                            <input type="text" name="website" id="website" placeholder="your-website.com" value={formData.website || ''} onChange={handleChange} className="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-pink-500 focus:border-pink-500" />
                         </div>
                     </div>
                 </form>

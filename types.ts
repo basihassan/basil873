@@ -9,6 +9,7 @@ export interface User {
   bio: string;
   instagram?: string;
   twitter?: string;
+  website?: string;
   password?: string;
 }
 
